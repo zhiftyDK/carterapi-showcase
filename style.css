@@ -15,10 +15,22 @@
     position: absolute;
     color: white;
     width: 100%;
-    text-align: center;
+    text-align: start;
+    margin-left: 100px;
     margin-top: 100px;
     font-size: 60px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.button {
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    font-weight: bolder;
+    display: inline;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 #myVideo {
