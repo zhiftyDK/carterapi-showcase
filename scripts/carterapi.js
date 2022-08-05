@@ -40,7 +40,7 @@ function playAudio(file) {
 function weather(inputSentence) {
     weatherFromSentence(inputSentence)
     .then(data => {
-        const sentence = `The temperature is ${Math.floor(data.weather.main.temp)} degrees, with ${data.weather.info.description}`;
+        const sentence = `In ${data.city} the temperature is ${Math.floor(data.weather.main.temp)} degrees, with ${data.weather.info.description}`;
         playAudio(`https://api.carterapi.com/v0/speak/ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG/${sentence}`)
     })
 }
@@ -56,6 +56,7 @@ function music(inputSentence) {
     fetch("https://www.googleapis.com/youtube/v3/search?key=AIzaSyCk4DztX4RNPfT_QPrFoXNlsugabfg78mY&part=snippet&type=video&q=" + query)
     .then(response => response.json())
     .then(data => {
+        const title = data.items[0].snippet.title.replace("/", "");
         fetch("https://youtube-mp36.p.rapidapi.com/dl?id=" + data.items[0].id.videoId, {
             method: 'GET',
             headers: {
@@ -65,8 +66,11 @@ function music(inputSentence) {
         })
         .then(response => response.json())
         .then(data => {
-            var audio = new Audio(data.link);
-            audio.play();
+            playAudio(`https://api.carterapi.com/v0/speak/ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG/playing ${title}`)
+            setTimeout(() => {
+                var audio = new Audio(data.link);
+                audio.play();
+            }, 3000);
         });
     });
 }
