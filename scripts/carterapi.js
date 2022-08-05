@@ -24,15 +24,15 @@ function carterapi(query) {
             } 
 
             if(i == data.triggers.length - 1 && triggerFound == false) {
-                playAudio(data.output.voice);
+                playAudio(data.output.text);
             }
         }
     });
 }
 
 //Play audio
-function playAudio(file) {
-    var audio = new Audio(file);
+function playAudio(text) {
+    var audio = new Audio("https://api.carterapi.com/v0/speak/ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG/" + text);
     audio.play();
 }
 
@@ -41,14 +41,14 @@ function weather(inputSentence) {
     weatherFromSentence(inputSentence)
     .then(data => {
         const sentence = `In ${data.city} the temperature is ${Math.floor(data.weather.main.temp)} degrees, with ${data.weather.info.description}`;
-        playAudio(`https://api.carterapi.com/v0/speak/ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG/${sentence}`)
+        playAudio(sentence)
     })
 }
 
 function time() {
     const date = new Date();
     const time = date.getHours() + " " + date.getMinutes();
-    playAudio(`https://api.carterapi.com/v0/speak/ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG/the time is ${time}`)
+    playAudio(`the time is ${time}`)
 }
 
 function music(inputSentence) {
@@ -66,7 +66,7 @@ function music(inputSentence) {
         })
         .then(response => response.json())
         .then(data => {
-            playAudio(`https://api.carterapi.com/v0/speak/ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG/playing ${title}`)
+            playAudio(title)
             setTimeout(() => {
                 var audio = new Audio(data.link);
                 audio.play();
