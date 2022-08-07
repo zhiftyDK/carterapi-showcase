@@ -7,6 +7,7 @@ let model, emodel;
     let outputs_ = [model.output, model.getLayer("attention_vector").output];
     emodel = tf.model({inputs: model.input, outputs: outputs_});
     console.log(emodel);
+    document.body.style.display = "block";
 })();
 
 

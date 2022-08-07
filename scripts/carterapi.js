@@ -26,7 +26,7 @@ recognition.onend = function() {
 
 //Play audio
 function playAudio(text) {
-    var audio = new Audio("https://api.carterapi.com/v0/speak/ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG/" + text);
+    var audio = new Audio("https://api.carterapi.com/v0/speak/0K60xcaSkGjeb1xrRilIlId6AHOfIC8J/" + text);
     audio.play();
     return audio;
 }
@@ -40,7 +40,7 @@ function carterApi(query) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            api_key: 'ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG',
+            api_key: '0K60xcaSkGjeb1xrRilIlId6AHOfIC8J',
             'query': query,
             'uuid': "user-id-123"
         })
