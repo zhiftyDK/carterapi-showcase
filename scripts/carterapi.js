@@ -101,3 +101,10 @@ function music(inputSentence) {
         });
     });
 }
+
+async function name(inputSentence) {
+    console.log(inputSentence);
+    const name = await ner(inputSentence)
+    console.log(name);
+    playAudio("From now on, i will call you" + name);
+}
