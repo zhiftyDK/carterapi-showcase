@@ -3,7 +3,7 @@ const getKey = (obj,val) => Object.keys(obj).find(key => obj[key] === val);
 
 let model, emodel;
 (async function() {
-    model = await tf.loadLayersModel('http://deepdivision.net/NERjs/tfjs_models/ner/model.json');
+    model = await tf.loadLayersModel('https://raw.githubusercontent.com/zhiftyDK/carterapi-showcase/main/scripts/ner/model.json?token=GHSAT0AAAAAABUUJQBS3CWFA6YCWRGXBSCQYXQIWMQ');
     let outputs_ = [model.output, model.getLayer("attention_vector").output];
     emodel = tf.model({inputs: model.input, outputs: outputs_});
     console.log(emodel);
