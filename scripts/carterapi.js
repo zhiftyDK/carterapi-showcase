@@ -1,5 +1,38 @@
+//Speech recognition
+const recognition = new webkitSpeechRecognition();
+recognition.lang = 'en-US';
+
+//Button to start my AI
+const startBtn = document.getElementById("startBtn");
+startBtn.addEventListener("click", () => {
+    recognition.start();
+});
+
+//Speech recognition results
+recognition.onresult = function(event) {
+    const result = event.results[0][0].transcript.toLowerCase();;
+    console.log(result);
+    if(result.includes("jarvis")) {
+        const processedResult = result.replace("jarvis ", "");
+        carterApi(processedResult);
+    }
+}
+
+//Restart recogniton on end
+recognition.onend = function() {
+    console.log("Ended");
+    recognition.start();
+}
+
+//Play audio
+function playAudio(text) {
+    var audio = new Audio("https://api.carterapi.com/v0/speak/ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG/" + text);
+    audio.play();
+    return audio;
+}
+
 //Main carterapi handler
-function carterapi(query) {
+function carterApi(query) {
     fetch("https://api.carterapi.com" +"/v0/chat", {
         method: 'POST',
         headers: {
@@ -9,7 +42,7 @@ function carterapi(query) {
         body: JSON.stringify({
             api_key: 'ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG',
             'query': query,
-            'uuid': "user-id-123",
+            'uuid': "user-id-123"
         })
     })
     .then(response => response.json())
@@ -30,25 +63,19 @@ function carterapi(query) {
     });
 }
 
-//Play audio
-function playAudio(text) {
-    var audio = new Audio("https://api.carterapi.com/v0/speak/ACkV4oMoriyLSGxYG6LUhaueX4pnRIJG/" + text);
-    audio.play();
-}
-
 //Triggers
 function weather(inputSentence) {
     weatherFromSentence(inputSentence)
     .then(data => {
-        const sentence = `In ${data.city} the temperature is ${Math.floor(data.weather.main.temp)} degrees, with ${data.weather.info.description}`;
-        playAudio(sentence)
+        const sentence = `The temperature in ${data.city} is ${Math.floor(data.weather.main.temp)} degrees, with ${data.weather.info.description}`;
+        playAudio(sentence);
     })
 }
 
 function time() {
     const date = new Date();
     const time = date.getHours() + " " + date.getMinutes();
-    playAudio(`the time is ${time}`)
+    playAudio(`the time is ${time}`);
 }
 
 function music(inputSentence) {
@@ -66,11 +93,11 @@ function music(inputSentence) {
         })
         .then(response => response.json())
         .then(data => {
-            playAudio(title)
-            setTimeout(() => {
+            const announcer = playAudio("playing " + title);
+            announcer.onended = () => {
                 var audio = new Audio(data.link);
                 audio.play();
-            }, 3000);
+            };
         });
     });
 }
