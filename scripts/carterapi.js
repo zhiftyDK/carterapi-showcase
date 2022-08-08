@@ -65,10 +65,11 @@ function carterApi(query) {
 
 //Triggers
 function weather(inputSentence) {
-    weatherFromSentence(inputSentence)
+    weatherFromSentence(inputSentence, "f4e80e2071fcae0bd7c122d2f82fd284")
     .then(data => {
         const sentence = `The temperature in ${data.city} is ${Math.floor(data.weather.main.temp)} degrees, with ${data.weather.info.description}`;
         playAudio(sentence);
+        console.log(data);
     })
 }
 
