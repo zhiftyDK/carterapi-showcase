@@ -79,6 +79,14 @@ function time() {
     playAudio(`the time is ${time}`);
 }
 
+async function name(inputSentence) {
+    console.log(inputSentence);
+    const name = await ner(inputSentence)
+    console.log(name);
+    playAudio("From now on, i will call you" + name);
+}
+
+const mediaPlayer = new Audio();
 function music(inputSentence) {
     const query = inputSentence.replace("play ", "");
     fetch("https://www.googleapis.com/youtube/v3/search?key=AIzaSyCk4DztX4RNPfT_QPrFoXNlsugabfg78mY&part=snippet&type=video&q=" + query)
@@ -96,16 +104,17 @@ function music(inputSentence) {
         .then(data => {
             const announcer = playAudio("playing " + title);
             announcer.onended = () => {
-                var audio = new Audio(data.link);
-                audio.play();
+                mediaPlayer.src = data.link;
+                mediaPlayer.play();
             };
         });
     });
 }
 
-async function name(inputSentence) {
-    console.log(inputSentence);
-    const name = await ner(inputSentence)
-    console.log(name);
-    playAudio("From now on, i will call you" + name);
+function pause() {
+    mediaPlayer.pause();
+}
+
+function play() {
+    mediaPlayer.play();
 }
