@@ -92,6 +92,7 @@ function music(inputSentence) {
     fetch("https://www.googleapis.com/youtube/v3/search?key=AIzaSyCk4DztX4RNPfT_QPrFoXNlsugabfg78mY&part=snippet&type=video&q=" + query)
     .then(response => response.json())
     .then(data => {
+        //window.open("https://youtube.com/watch?v=" + data.items[0].id.videoId);
         const title = data.items[0].snippet.title.replace("/", "");
         fetch("https://youtube-mp36.p.rapidapi.com/dl?id=" + data.items[0].id.videoId, {
             method: 'GET',
