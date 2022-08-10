@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 const CANVAS_WIDTH = canvas.width=1920;
 const CANVAS_HEIGHT = canvas.height=1080;
-
+//hey
 const playerImage = new Image();
 playerImage.src = "idleframes.png";
 const spriteWidth = 1920;
