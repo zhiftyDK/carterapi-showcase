@@ -12,10 +12,11 @@ startBtn.addEventListener("click", () => {
 recognition.onresult = function(event) {
     const result = event.results[0][0].transcript.toLowerCase();;
     console.log(result);
-    if(result.includes("jarvis")) {
-        const processedResult = result.replace("jarvis ", "");
-        carterApi(processedResult);
-    }
+    carterApi(result);
+    // if(result.includes("jarvis")) {
+    //     const processedResult = result.replace("jarvis ", "");
+    //     carterApi(processedResult);
+    // }
 }
 
 //Restart recogniton on end
@@ -33,6 +34,7 @@ function playAudio(text) {
 
 //Main carterapi handler
 function carterApi(query) {
+    
     fetch("https://api.carterapi.com" +"/v0/chat", {
         method: 'POST',
         headers: {
@@ -57,6 +59,7 @@ function carterApi(query) {
             } 
 
             if(i == data.triggers.length - 1 && triggerFound == false) {
+                let animation_frames = animation_sheet_arranged(data.output.text);
                 playAudio(data.output.text);
             }
         }
