@@ -8,7 +8,6 @@ function animation_sheet_arranged(result)
     //6- CHSHJR frames
     //7- O frames
     //8- QW frames
-
     let frames = [];
     console.log(result.length);
     for(let i=0;i<result.length;i++)
